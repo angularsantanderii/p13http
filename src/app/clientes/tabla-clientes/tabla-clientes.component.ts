@@ -19,6 +19,23 @@ export class TablaClientesComponent implements OnInit {
     this.formSearch = new FormGroup({
       search: new FormControl('')
     })
+    this.searchClientes();
+  }
+
+  searchClientes() {
+    this.formSearch.get('search')?.valueChanges
+                                  .pipe()
+                                 .subscribe(term => {
+                                   if(term.length === 0) {
+                                     this.clientes = [];
+                                   } else {
+                                     this.clientesService.searchClientes(term)
+                                                         .subscribe({
+                                                           next: (resp: any) => {this.clientes = resp.clientes},
+                                                           error: (error: any) => {console.log(error)}
+                                                         })
+                                   }
+                                 })
   }
 
   cargarClientes(): void{
