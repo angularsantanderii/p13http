@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ClientesService } from 'src/app/servicios/clientes.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class TablaClientesComponent implements OnInit {
 
   clientes: Array<any> = [];
   formSearch: FormGroup = new FormGroup({});
+  loading: boolean = false;
 
   constructor(private clientesService: ClientesService) { }
 
@@ -24,14 +26,21 @@ export class TablaClientesComponent implements OnInit {
 
   searchClientes() {
     this.formSearch.get('search')?.valueChanges
-                                  .pipe()
+                                  .pipe(
+                                    debounceTime(300),
+                                    distinctUntilChanged()
+                                  )
                                  .subscribe(term => {
                                    if(term.length === 0) {
                                      this.clientes = [];
                                    } else {
+                                     this.loading = true;
                                      this.clientesService.searchClientes(term)
                                                          .subscribe({
-                                                           next: (resp: any) => {this.clientes = resp.clientes},
+                                                           next: (resp: any) => {
+                                                             this.loading = false;
+                                                             this.clientes = resp.clientes;
+                                                            },
                                                            error: (error: any) => {console.log(error)}
                                                          })
                                    }

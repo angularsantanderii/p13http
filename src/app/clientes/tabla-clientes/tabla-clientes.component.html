@@ -1,6 +1,7 @@
 <div class="card xl">
     <div class="titles-row">
         <h1>Clientes</h1>
+        <button routerLink="/crear-cliente">Nuevo cliente</button>
     </div>
     <hr>
     <div class="row">
@@ -13,9 +14,12 @@
             <th>Nombre</th>
             <th>Localidad</th>
         </tr>
-        <tr *ngFor="let cliente of clientes">
-            <td>{{cliente.nombre}}</td>
-            <td>{{cliente.localidad}}</td>
-        </tr>
+        <p *ngIf="loading">Cargando...</p>
+        <ng-container *ngIf="!loading"> <!-- Porque *ngIf y *ngFor no pueden estar en el mismo elemento-->
+            <tr *ngFor="let cliente of clientes">
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.localidad}}</td>
+            </tr>
+        </ng-container>
     </table>
 </div>
