@@ -5,10 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TablaClientesComponent } from './clientes/tabla-clientes/tabla-clientes.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TablaClientesComponent
   ],
   imports: [
     BrowserModule,

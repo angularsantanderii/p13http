@@ -1,0 +1,21 @@
+<div class="card xl">
+    <div class="titles-row">
+        <h1>Clientes</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <form [formGroup]="formSearch">
+            <input type="search" formControlName="search" placeholder="Nombre del cliente">
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Localidad</th>
+        </tr>
+        <tr *ngFor="let cliente of clientes">
+            <td>{{cliente.nombre}}</td>
+            <td>{{cliente.localidad}}</td>
+        </tr>
+    </table>
+</div>
