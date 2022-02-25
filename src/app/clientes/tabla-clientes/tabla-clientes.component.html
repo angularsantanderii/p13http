@@ -13,12 +13,16 @@
         <tr>
             <th>Nombre</th>
             <th>Localidad</th>
+            <th></th>
+            <th></th>
         </tr>
         <p *ngIf="loading">Cargando...</p>
         <ng-container *ngIf="!loading"> <!-- Porque *ngIf y *ngFor no pueden estar en el mismo elemento-->
             <tr *ngFor="let cliente of clientes">
                 <td>{{cliente.nombre}}</td>
                 <td>{{cliente.localidad}}</td>
+                <td routerLink="/editar-cliente/{{cliente._id}}">Acceder</td>
+                <td (click)="eliminarCliente(cliente._id)">Eliminar</td> <!--Debería disparar una modal de confirmación-->
             </tr>
         </ng-container>
     </table>

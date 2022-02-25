@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TablaClientesComponent } from './clientes/tabla-clientes/tabla-clientes.component';
 import { CrearClienteComponent } from './clientes/crear-cliente/crear-cliente.component';
+import { EditarClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TablaClientesComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
+    EditarClienteComponent,
   ],
   imports: [
     BrowserModule,

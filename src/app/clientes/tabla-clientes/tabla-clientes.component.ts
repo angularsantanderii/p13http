@@ -60,4 +60,15 @@ export class TablaClientesComponent implements OnInit {
                         })
   }
 
+  eliminarCliente(_id: string): void { // Ojo que no tiene modal de confirmación porque no tenemos tiempo :)
+    this.clientesService.deleteCliente(_id)
+                        .subscribe({ 
+                          next: (resp: any) => {
+                            this.clientes = [];
+                            this.formSearch.get('search')?.patchValue('');
+                          },
+                          error: (error: any) => {console.log(error)}
+                        })
+  }
+
 }
